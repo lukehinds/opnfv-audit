@@ -43,12 +43,14 @@ def nextwork(target, source):
 def audit(project):
     pyimps = []
     javaimp = []
+    cinclude = []
     py = 0
     sh = 0
     java = 0
     c = 0
     for dirname, dirnames, filenames in os.walk(project):
         for filename in filenames:
+            # check if python files
             if filename.endswith('.py'):
                 py = py +1
                 with open(os.path.join(dirname.rstrip(), filename)) as f:
@@ -60,21 +62,51 @@ def audit(project):
                 sh = sh +1
             elif filename.endswith('.java'):
                 java = java +1
+                with open(os.path.join(dirname.rstrip(), filename)) as f:
+                    for line in f.readlines():
+                        if 'import' in line:
+                            line = line.split()
+                            try:
+                                javaimp.append(line[1])
+                            except IndexError:
+                                pass
             elif filename.endswith('.c'):
                 c = c +1
-    print '{0} python files\n'.format(py)
-    print 'Python modules Imported:\n'
-    print pyimps
-    print '\n'
-    print '{0} shellscript files'.format(sh)
-    print '\n'
-    print '{0} java files'.format(java)
-    print '{0} c files\n'.format(c)
+                with open(os.path.join(dirname.rstrip(), filename)) as f:
+                    for line in f.readlines():
+                        if '#include' in line:
+                            line = line.split()
+                            try:
+                                cinclude.append(line[1])
+                            except IndexError:
+                                pass
+    if py > 1:
+        print '{0} python files\n'.format(py)
+        print 'Python modules Imported:\n'
+        # Remove duplicates
+        pyimps = list(set(pyimps))
+        print pyimps
+        print '\n'
+    if sh > 1:
+        print '{0} shellscript files\n'.format(sh)
+    if java > 1:
+        print '{0} java files\n'.format(java)
+        print 'Java modules Imported:\n'
+        # Remove duplicates
+        javaimp = list(set(javaimp))
+        print javaimp
+    if c > 1:
+        print '{0} c files\n'.format(c)
+        # Remove duplicates
+        cinclude = list(set(cinclude))
+        print cinclude
+    if py < 1 and sh < 1 and java < 1 and c < 1:
+        print "No code found for this project\n"
 
 
 def main():
     for project in  dirlist:
-        print 'Project {0} contains:\n'.format(project)
+        print 'Project {0}:\n'.format(project)
         audit(project)
 
 if __name__ == "__main__":
