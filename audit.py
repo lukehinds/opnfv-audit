@@ -35,10 +35,6 @@ def clone():
             proj = "git clone https://gerrit.opnfv.org/gerrit/{0}".format(project)
             subprocess.call([(proj)], shell=True)
 
-def nextwork(target, source):
-    for i, w in enumerate(source):
-        if w == target:
-            return source[i+1]
 
 def audit(project):
     pyimps = []
@@ -95,6 +91,7 @@ def audit(project):
         # Remove duplicates
         javaimp = list(set(javaimp))
         print javaimp
+        print '\n'
     if c > 1:
         print '{0} c files\n'.format(c)
         # Remove duplicates
@@ -109,10 +106,12 @@ def main():
         print 'Project {0}:\n'.format(project)
         audit(project)
 
+
 if __name__ == "__main__":
     choice = None
     print "(c)lone or (u)pdate or (a)udit\n"
     val = raw_input("Enter Option: ").lower()
+    print '\r'
     if val == 'c':
         clone()
     elif val == 'u':
