@@ -1,4 +1,16 @@
-# !/usr/bin/python
+#!/usr/bin/python
+#
+# Copyright (c) 2016 Red Hat
+# Luke Hinds (lhinds@redhat.com)
+# This program and the accompanying materials
+# are made available under the terms of the Apache License, Version 2.0
+# which accompanies this distribution, and is available at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# 0.1: This script installs OpenSCAP on the remote host, and scans the
+# nominated node. Post scan a report is downloaded and if '--clean' is passed
+# all trace of the scan is removed from the remote system.
 
 import os
 import subprocess
