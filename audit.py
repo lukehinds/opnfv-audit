@@ -77,26 +77,25 @@ def audit(project):
                             except IndexError:
                                 pass
     if py > 1:
-        print '{0} python files\n'.format(py)
+        print '{0} python files found.\n'.format(py)
         print 'Python modules Imported:\n'
         # Remove duplicates
         pyimps = list(set(pyimps))
-        print pyimps
+        print('\n'.join('{}: {}'.format(*k) for k in enumerate(pyimps)))
         print '\n'
     if sh > 1:
-        print '{0} shellscript files\n'.format(sh)
+        print '{0} shellscript files found\n'.format(sh)
     if java > 1:
-        print '{0} java files\n'.format(java)
+        print '{0} java files found.\n'.format(java)
         print 'Java modules Imported:\n'
         # Remove duplicates
         javaimp = list(set(javaimp))
-        print javaimp
-        print '\n'
+        print('\n'.join('{}: {}'.format(*k) for k in enumerate(javaimp)))
     if c > 1:
-        print '{0} c files\n'.format(c)
+        print '{0} C files found.\n'.format(c)
         # Remove duplicates
         cinclude = list(set(cinclude))
-        print cinclude
+        print('\n'.join('{}: {}'.format(*k) for k in enumerate(cinclude)))
     if py < 1 and sh < 1 and java < 1 and c < 1:
         print "No code found for this project\n"
 
