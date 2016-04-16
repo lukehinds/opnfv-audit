@@ -8,9 +8,7 @@
 #
 # http://www.apache.org/licenses/LICENSE-2.0
 #
-# 0.1: This script installs OpenSCAP on the remote host, and scans the
-# nominated node. Post scan a report is downloaded and if '--clean' is passed
-# all trace of the scan is removed from the remote system.
+# 0.1: This script provides an audit of all files in opnfv repos
 
 import os
 import subprocess
