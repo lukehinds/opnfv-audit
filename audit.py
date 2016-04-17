@@ -112,10 +112,9 @@ def audit(project):
                             except IndexError:
                                 pass
     if py > 1:
+        # Report the amount of Python Scrips found using the 'py counter'
         sys.stdout.write("%s%s python files found.%s" % (MESSAGE,py, RESET))
         sys.stdout.write("\n\n")
-        # Report the amount of Python Scrips found using the 'py counter'
-        print '{0} python files found.\n'.format(py)
         # Print out the import modules found, in a nicer format then a long
         # python list
         sys.stdout.write("%sPython modules Imported:%s" % (MESSAGE, RESET))
@@ -127,7 +126,7 @@ def audit(project):
     if sh > 1:
         print '{0} shellscript files found\n'.format(sh)
     if java > 1:
-        sys.stdout.write("%s%s python files found.%s" % (MESSAGE,java, RESET))
+        sys.stdout.write("%s%s java files found.%s" % (MESSAGE,java, RESET))
         sys.stdout.write("\n\n")
         sys.stdout.write("%sJava modules Imported:%s" % (MESSAGE, RESET))
         sys.stdout.write("\n")
